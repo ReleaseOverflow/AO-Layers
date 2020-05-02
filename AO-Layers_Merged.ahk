@@ -895,7 +895,7 @@ Sleep, 1500
     GuiControl, Text, LoopStateText, %stackSetStatus%
 
 DoShiftHotbarTo1()
-PerformanceMinimize()
+;PerformanceMinimize()
 SplashTextOff
 WinActivate, Layers
 TransitionFrom3ToEnd()
