@@ -524,7 +524,7 @@ GLOBAL cl_char06 := "Anarchy Online - " . ICvarCHAR06
     Sleep, 50
     Send {Shift UP}
     Sleep, 800
-    PerformanceMinimize_1()
+    ; PerformanceMinimize_1()
     Sleep, 50
     }
     Else
@@ -542,7 +542,7 @@ GLOBAL cl_char06 := "Anarchy Online - " . ICvarCHAR06
     Sleep, 50
     Send {Shift UP}
     Sleep, 800
-    PerformanceMinimize_2()
+    ; PerformanceMinimize_2()
     Sleep, 50
     }
     Else
@@ -560,7 +560,7 @@ GLOBAL cl_char06 := "Anarchy Online - " . ICvarCHAR06
     Sleep, 50
     Send {Shift UP}
     Sleep, 800
-    PerformanceMinimize_3()
+    ; PerformanceMinimize_3()
     Sleep, 50
     }
     Else
@@ -578,7 +578,7 @@ GLOBAL cl_char06 := "Anarchy Online - " . ICvarCHAR06
     Sleep, 50
     Send {Shift UP}
     Sleep, 800
-    PerformanceMinimize_4()
+    ; PerformanceMinimize_4()
     Sleep, 50
     }
     Else
@@ -596,7 +596,7 @@ GLOBAL cl_char06 := "Anarchy Online - " . ICvarCHAR06
     Sleep, 50
     Send {Shift UP}
     Sleep, 800
-    PerformanceMinimize_5()
+    ; PerformanceMinimize_5()
     Sleep, 50
     }
     Else
@@ -614,7 +614,7 @@ GLOBAL cl_char06 := "Anarchy Online - " . ICvarCHAR06
     Sleep, 50
     Send {Shift UP}
     Sleep, 800
-    PerformanceMinimize_6()
+    ; PerformanceMinimize_6()
     Sleep, 50
     }
     Else
@@ -655,7 +655,7 @@ GLOBAL cl_char06 := "Anarchy Online - " . ICvarCHAR06
     Sleep, 250
     Send {Shift UP}
     Sleep, 800
-    PerformanceMinimize_1()
+    ; PerformanceMinimize_1()
     Sleep, 50
     }
     Else
@@ -674,7 +674,7 @@ GLOBAL cl_char06 := "Anarchy Online - " . ICvarCHAR06
     Sleep, 250
     Send {Shift UP}
     Sleep, 800
-    PerformanceMinimize_2()
+    ; PerformanceMinimize_2()
     Sleep, 50
     }
     Else
@@ -693,7 +693,7 @@ GLOBAL cl_char06 := "Anarchy Online - " . ICvarCHAR06
     Sleep, 250
     Send {Shift UP}
     Sleep, 800
-    PerformanceMinimize_3()
+    ; PerformanceMinimize_3()
     Sleep, 50
     }
     Else
@@ -712,7 +712,7 @@ GLOBAL cl_char06 := "Anarchy Online - " . ICvarCHAR06
     Sleep, 250
     Send {Shift UP}
     Sleep, 800
-    PerformanceMinimize_4()
+    ; PerformanceMinimize_4()
     Sleep, 50
     }
     Else
@@ -731,7 +731,7 @@ GLOBAL cl_char06 := "Anarchy Online - " . ICvarCHAR06
     Sleep, 250
     Send {Shift UP}
     Sleep, 800
-    PerformanceMinimize_5()
+    ; PerformanceMinimize_5()
     Sleep, 50
     }
     Else
@@ -750,7 +750,7 @@ GLOBAL cl_char06 := "Anarchy Online - " . ICvarCHAR06
     Sleep, 250
     Send {Shift UP}
     Sleep, 800
-    PerformanceMinimize_6()
+    ; PerformanceMinimize_6()
     Sleep, 50
     }
     Else
@@ -791,7 +791,7 @@ GLOBAL cl_char06 := "Anarchy Online - " . ICvarCHAR06
     Sleep, 50
     Send {Shift UP}
     Sleep, 800
-    PerformanceMinimize_1()
+    ; PerformanceMinimize_1()
     Sleep, 50
     }
     Else
@@ -809,7 +809,7 @@ GLOBAL cl_char06 := "Anarchy Online - " . ICvarCHAR06
     Sleep, 50
     Send {Shift UP}
     Sleep, 800
-    PerformanceMinimize_2()
+    ; PerformanceMinimize_2()
     Sleep, 50
     }
     Else
@@ -827,7 +827,7 @@ GLOBAL cl_char06 := "Anarchy Online - " . ICvarCHAR06
     Sleep, 50
     Send {Shift UP}
     Sleep, 800
-    PerformanceMinimize_3()
+    ; PerformanceMinimize_3()
     Sleep, 50
     }
     Else
@@ -845,7 +845,7 @@ GLOBAL cl_char06 := "Anarchy Online - " . ICvarCHAR06
     Sleep, 50
     Send {Shift UP}
     Sleep, 800
-    PerformanceMinimize_4()
+    ; PerformanceMinimize_4()
     Sleep, 50
     }
     Else
@@ -863,7 +863,7 @@ GLOBAL cl_char06 := "Anarchy Online - " . ICvarCHAR06
     Sleep, 50
     Send {Shift UP}
     Sleep, 800
-    PerformanceMinimize_5()
+    ; PerformanceMinimize_5()
     Sleep, 50
     }
     Else
@@ -881,13 +881,15 @@ GLOBAL cl_char06 := "Anarchy Online - " . ICvarCHAR06
     Sleep, 50
     Send {Shift UP}
     Sleep, 800
-    PerformanceMinimize_6()
+    ; PerformanceMinimize_6()
     Sleep, 50
     }
     Else
     {
             Sleep, 10
     }
+
+
 
     Return
 }

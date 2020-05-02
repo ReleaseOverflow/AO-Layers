@@ -30,16 +30,6 @@ GLOBAL HB3Speed := "8000"
 
 
 
-GLOBAL EngineTitle := "LAYERS"
-GLOBAL EngineVersion := "4.00.927C"
-GLOBAL EngineBuild := "BUILD 235109"
-
-
-GLOBAL EngineError0x0 := "Missing Files"
-GLOBAL EngineError0x1 := "Missing Info"
-GLOBAL EngineInfo0x0 := "Reconstruction"
-
-
 
     if FileExist("buff_core.ini")
     {
@@ -56,27 +46,35 @@ Sleep, 500
 ; ini.write("ENGINE", "AutoUpdateAOIDlist", "0", "`n`    Automatically Update AO Window List `n` `n` `n` `n` `n`")
 ; ini.write("ENGINE", "AOIA_InstallPath", "Replace_Me", "`n`    Example: `n` D:\Program Files (x86)\AO Item Assistant+ `n` `n` `n`")
 ; ini.write("ENGINE", "AO_OldEngine_InstallPath", "Replace_Me", "`n`    Example: `n` C:\Program Files (x86)\Funcom\Anarchy Online `n` `n` `n`")
-ini.write("MODULE", "Disable_Row_3", "0", "`n`    Toggle enabling execution of Hotbar Row 3 `n`  DEFAULT: 0 `n` `n` `n`")
-ini.write("MODULE", "Disable_Row_2", "0", "`n`    Toggle enabling execution of Hotbar Row 2 `n`  DEFAULT: 0 `n`")
-ini.write("MODULE", "Disable_Row_1", "0", "`n`    Toggle enabling execution of Hotbar Row 1 `n`  DEFAULT: 0 `n`", "                   ENGINE OPTIONS (Configure these) `n`")
+ini.write("ENGINE", "Disable_", "0", "`n`    Toggle Running With Administrator `n` `n`", "                   ENGINE OPTIONS (Configure these) `n`")
 ini.write("ENGINE", "RunWithAdmin", "0", "`n`    Toggle Running With Administrator `n` `n`", "                   ENGINE OPTIONS (Configure these) `n`")
-ini.write("CLIENT", "ThirdHotbarRow", "3", "`n`    The number of the third Hotbar Buffing Row `n`  DEFAULT: 3 `n` `n` `n` `n`")
-ini.write("CLIENT", "SecondHotbarRow", "2", "`n`    The number of the second Hotbar Buffing Row `n`   DEFAULT: 2 `n` `n` `n` `n`")
-ini.write("CLIENT", "FirstHotbarRow", "1", "`n` The number of the first Hotbar Buffing Row (Ex. For Shift+1) `n`  DEFAULT: 1 `n` `n` `n` `n`")
+ini.write("CLIENT", "ThirdHotbarRow", "3", "`n`    The number of the third Hotbar Buffing Row `n` `n` `n` `n` `n`")
+ini.write("CLIENT", "SecondHotbarRow", "2", "`n`    The number of the second Hotbar Buffing Row `n` `n` `n` `n` `n`")
+ini.write("CLIENT", "FirstHotbarRow", "1", "`n` The number of the first Hotbar Buffing Row (Ex. For Shift+1) `n` `n` `n` `n` `n`")
 ini.write("CLIENT", "CharacterName_06", "NameHere", "`n`    Sixth Character's Name `n` `n` `n` `n` `n`")
 ini.write("CLIENT", "CharacterName_05", "NameHere", "`n`    Fifth Character's Name `n` `n` `n`")
 ini.write("CLIENT", "CharacterName_04", "NameHere", "`n`    Fourth Character's Name `n` `n` `n`")
 ini.write("CLIENT", "CharacterName_03", "NameHere", "`n`    Third Character's Name `n` `n` `n`")
 ini.write("CLIENT", "CharacterName_02", "NameHere", "`n`    Second Character's Name `n` `n` `n`")
-ini.write("CLIENT", "CharacterName_01", "Raidcaptain", "`n`    First Character's Name `n`    (ALL FOLLOWING CLIENT CONVARS ARE CASE SENSITIVE) `n` `n` `n` ", "                   CLIENT OPTIONS (Configure these) `n` `n`")
+ini.write("CLIENT", "CharacterName_01", "Raidcaptain", "`n`    First Character's Name `n`    (ALL CLIENT CONVARS ARE CASE SENSITIVE) `n` `n` `n` ", "                   CLIENT OPTIONS (Configure these) `n` `n`")
 ; ini.write("SOUND", "QuickLaunch_AOIA", "1", "`n`    Plays Sound when Quick Launching AOIA `n` `n` `n` `n` `n`")
 ; ini.write("SOUND", "QuickLaunch_AOoldEngineSteam", "1", "`n`    Plays Sound when Quick Launching AO STEAM `n` `n` `n`")
 ; ini.write("SOUND", "QuickLaunch_AOoldEngine", "1", "`n`    Plays Sound when Quick Launching AO `n` `n` `n`")
 ; ini.write("SOUND", "LoopEnd", "1", "`n`    Plays Sound on loop end `n` `n` `n`")
 ; ini.write("SOUND", "LoopStart", "1", "`n`    Plays Sound on loop start `n` `n` `n`", "                   SOUND OPTIONS (Configure these) `n` `n`")
-ini.write("VELOCITY", "Third_HotbarRow_Speed", "8000", "`n`    Speed that the third Hotbar will be executed at `n`  DEFAULT: 8000 `n` `n` `n` `n`")
-ini.write("VELOCITY", "Second_HotbarRow_Speed", "8000", "`n`    Speed that the second Hotbar will be executed at `n`  DEFAULT: 8000 `n`")
-ini.write("VELOCITY", "First_HotbarRow_Speed", "8000", "`n`    Speed that the first Hotbar will be executed at `n`  DEFAULT: 8000 `n` `n`", "                   DEFAULT KEY LOOPING SPEEDS (MILLISECONDS)`n` `n`")
+ini.write("VELOCITY", "Third_HotbarRow_Speed", "8000", "`n`    Speed that the third Hotbar will be executed at `n` `n` `n` `n` `n`")
+ini.write("VELOCITY", "Second_HotbarRow_Speed", "8000", "`n`    Speed that the second Hotbar will be executed at `n` `n`")
+; ini.write("VELOCITY", "NSpeedDefault", "7900", "`n`    N Key LoopRate Default Speed `n` `n`")
+; ini.write("VELOCITY", "BSpeedDefault", "7800", "`n`    B Key LoopRate Default Speed `n` `n`")
+; ini.write("VELOCITY", "VSpeedDefault", "7700", "`n`    V Key LoopRate Default Speed `n` `n`")
+; ini.write("VELOCITY", "LSpeedDefault", "7600", "`n`    L Key LoopRate Default Speed `n` `n`")
+; ini.write("VELOCITY", "KSpeedDefault", "7500", "`n`    K Key LoopRate Default Speed `n` `n`")
+; ini.write("VELOCITY", "JSpeedDefault", "7400", "`n`    J Key LoopRate Default Speed `n` `n`")
+; ini.write("VELOCITY", "GSpeedDefault", "7300", "`n`    G Key LoopRate Default Speed `n` `n`")
+; ini.write("VELOCITY", "FSpeedDefault", "7200", "`n`    F Key LoopRate Default Speed `n` `n`")
+; ini.write("VELOCITY", "RSpeedDefault", "7100", "`n`    R Key LoopRate Default Speed `n` `n`")
+; ini.write("VELOCITY", "ESpeedDefault", "7000", "`n`    E Key LoopRate Default Speed `n` `n`")
+ini.write("VELOCITY", "First_HotbarRow_Speed", "8000", "`n`    Speed that the first Hotbar will be executed at `n` `n` `n`", "                   DEFAULT KEY LOOPING SPEEDS (MILLISECONDS)`n` `n`")
 ; ini.write("DEBUG", "AutoAOIDUpdateMsg", "0", "`n`    Output TrayBallon Message On Each Loop `n` `n` `n`", "                   FOR DEVELOPER TESTING (CAN SAFELY IGNORE)`n` `n`")
 ini.Save()
 Sleep, 500
@@ -176,17 +174,6 @@ Return
 
 
 IssueHB1all:   ;;; (Issue Hotbar 1 ALL)
-IniRead, ICvarDisableRow1, buff_core.ini, MODULE, Disable_Row_1, ;;;%IniKeyErrorElevate%
-If(ICvarDisableRow1 = 1)
-{
-    Sleep, 10
-    TransitionFrom1To2()
-    SetTimer, IssueHB1all, Off
-    Return
-}
-Else If(ICvarDisableRow1 = 0)
-{
-
     GLOBAL LastRowSent := "1"
     GLOBAL stackSetStatus := "ACTIVE"
     GuiControl, Text, LastLoopRow, %LastRowSent%
@@ -195,6 +182,8 @@ Else If(ICvarDisableRow1 = 0)
 TurnAllTimersOff1()
 DoShiftHotbarTo1()
 Sleep, 1800
+
+
 GlobalSendKeyF1()
 Sleep, 1750
 GlobalSendKey1()
@@ -220,27 +209,10 @@ Sleep, 1500
 
 TransitionFrom1To2()
 SetTimer, IssueHB1all, Off
-    Return
-}
-Else
-{
-    MsgBox, NULL ERROR   @    { ICvarDisableRow1 } The value parse returned blank.  ;;; Script will now act as though this setting is at 0.
-    Return
-}
 Return
 
 
 IssueHB2all:   ;;; (Issue Hotbar 2 ALL)
-IniRead, ICvarDisableRow2, buff_core.ini, MODULE, Disable_Row_2, ;;;%IniKeyErrorElevate%
-If(ICvarDisableRow2 = 1)
-{
-    Sleep, 10
-    TransitionFrom2To3()
-    SetTimer, IssueHB2all, Off
-    Return
-}
-Else If(ICvarDisableRow2 = 0)
-{
     GLOBAL LastRowSent := "2"
     GLOBAL stackSetStatus := "ACTIVE"
     GuiControl, Text, LastLoopRow, %LastRowSent%
@@ -249,6 +221,7 @@ Else If(ICvarDisableRow2 = 0)
 TurnAllTimersOff2()
 DoShiftHotbarTo2()
 Sleep, 1800
+
 ; GlobalSendKeyF1()
 ; Sleep, %HB2Speed%
 GlobalSendKey1()
@@ -274,27 +247,10 @@ Sleep, 1500
 
 TransitionFrom2To3()
 SetTimer, IssueHB2all, Off
-    Return
-}
-Else
-{
-    MsgBox, NULL ERROR   @    { ICvarDisableRow2 } The value parse returned blank.  ;;; Script will now act as though this setting is at 0.
-    Return
-}
 Return
 
 
 IssueHB3all:   ;;; (Issue Hotbar 2 ALL)
-IniRead, ICvarDisableRow3, buff_core.ini, MODULE, Disable_Row_3, ;;;%IniKeyErrorElevate%
-If(ICvarDisableRow3 = 1)
-{
-    Sleep, 10
-    TransitionFrom3ToEnd()
-    SetTimer, IssueHB3all, Off
-    Return
-}
-Else If(ICvarDisableRow3 = 0)
-{
     GLOBAL LastRowSent := "3"
     GLOBAL stackSetStatus := "ACTIVE"
     GuiControl, Text, LastLoopRow, %LastRowSent%
@@ -303,6 +259,7 @@ Else If(ICvarDisableRow3 = 0)
 TurnAllTimersOff3()
 DoShiftHotbarTo3()
 Sleep, 1800
+
 
 ; GlobalSendKeyF1()
 ; Sleep, %HB3Speed%
@@ -334,13 +291,6 @@ Sleep, 1500
 
 TransitionFrom3ToEnd()
 SetTimer, IssueHB3all, Off
-    Return
-}
-Else
-{
-    MsgBox, NULL ERROR   @    { ICvarDisableRow3 } The value parse returned blank.  ;;; Script will now act as though this setting is at 0.
-    Return
-}
 Return
 
 

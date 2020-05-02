@@ -88,7 +88,7 @@ ini.write("CLIENT", "CharacterName_01", "Raidcaptain", "`n`    First Character's
 ini.write("VELOCITY", "Third_HotbarRow_Speed", "8000", "`n`    Speed that the third Hotbar will be executed at `n`  DEFAULT: 8000 `n` `n` `n` `n`")
 ini.write("VELOCITY", "Second_HotbarRow_Speed", "8000", "`n`    Speed that the second Hotbar will be executed at `n`  DEFAULT: 8000 `n`")
 ini.write("VELOCITY", "First_HotbarRow_Speed", "8000", "`n`    Speed that the first Hotbar will be executed at `n`  DEFAULT: 8000 `n` `n`", "                   DEFAULT KEY LOOPING SPEEDS (MILLISECONDS)`n` `n`")
-; ini.write("DEBUG", "AutoAOIDUpdateMsg", "0", "`n`    Output TrayBallon Message On Each Loop `n` `n` `n`", "                   FOR DEVELOPER TESTING (CAN SAFELY IGNORE)`n` `n`")
+ini.write("DEBUG", "Performance_Mode", "1", "`n`    Perform a window minimize after each Row Change `n` This is because non-minimized AO windows EAT performance `n` `n`", "                   PERFOMANCE AND DEBUG (For Issues)`n` `n`")
 ini.Save()
 Sleep, 500
 Reload
@@ -96,7 +96,8 @@ Reload
     }
 
 
-
+IniRead, PerformanceMode, buff_core.ini, DEBUG, Performance_Mode ,  ;;; Default]
+GLOBAL Performance_Mode := PerformanceMode
 
 
 
@@ -225,7 +226,8 @@ Gui, Add, Edit, x307 y370 w62 h20 vV3, %HB3Speed%
 Gui, Add, Button, x20 y215 w346 h50 gSubmitChars, SUBMIT  CHARACTER  NAMES
 ; Gui, Add, Button, x270 y395 w100 h20 gSubmitSpeeds, SUBMIT SPEEDS
 Gui, Add, Button, x252 y395 w130 h23 gSubmitSpeeds, SUBMIT SPEEDS
-Gui, Add, Button, x20 y391 w120 h50 gSubmitHelp, HELP
+Gui, Add, Button, x20 y391 w120 h50 gSubmitMinimize, MINIMIZE AO WINDOWS
+Gui, Add, Button, x144 y391 w90 h30 gSubmitHelp, HELP
 Gui, Add, Button, x20 y285 w170 h103 gSubmitStart, START
 Gui, Add, Button, x190 y285 w60 h103 gSubmitStop, STOP
 
@@ -264,6 +266,45 @@ WinActivate, Layers
 
 Return
 
+
+
+SubmitMinimize:
+Sleep, 50
+WinActivate, Anarchy Online - %ClientCharSlot6%
+Sleep, 10
+WinMinimize, Anarchy Online - %ClientCharSlot6%
+
+Sleep, 50
+WinActivate, Anarchy Online - %ClientCharSlot5%
+Sleep, 10
+WinMinimize, Anarchy Online - %ClientCharSlot5%
+
+Sleep, 50
+WinActivate, Anarchy Online - %ClientCharSlot4%
+Sleep, 10
+WinMinimize, Anarchy Online - %ClientCharSlot4%
+
+Sleep, 50
+WinActivate, Anarchy Online - %ClientCharSlot3%
+Sleep, 10
+WinMinimize, Anarchy Online - %ClientCharSlot3%
+
+Sleep, 50
+WinActivate, Anarchy Online - %ClientCharSlot2%
+Sleep, 10
+WinMinimize, Anarchy Online - %ClientCharSlot2%
+
+Sleep, 50
+WinActivate, Anarchy Online - %ClientCharSlot1%
+Sleep, 10
+WinMinimize, Anarchy Online - %ClientCharSlot1%
+Sleep, 200
+SetTitleMatchMode, 2
+Sleep, 500
+WinMinimize, Anarchy Online - 
+Sleep, 50
+SetTitleMatchMode, 1
+Return
 
 
 SubmitHelp:
@@ -329,6 +370,9 @@ UpdateDebugStrings()
 UpdateSpeedMult()
 DoShiftHotbarTo1()
 
+Sleep, 1000
+WinActivate, Layers
+; PerformanceMinimize()
 Sleep, 1860
 GlobalSendKeyF1()
 Sleep, 1750
@@ -387,6 +431,9 @@ UpdateDebugStrings()
 UpdateSpeedMult()
 DoShiftHotbarTo2()
 
+Sleep, 1000
+WinActivate, Layers
+; PerformanceMinimize()
 Sleep, 1860
 GlobalSendKeyF1()
 ; Sleep, %HB2Speed%
@@ -444,9 +491,11 @@ TurnAllTimersOff3()
 UpdateDebugStrings()
 UpdateSpeedMult()
 DoShiftHotbarTo3()
+
+Sleep, 1000
+WinActivate, Layers
+; PerformanceMinimize()
 Sleep, 1860
-
-
 ; GlobalSendKeyF1()
 ; Sleep, %HB3Speed%
 GlobalSendKey1()
@@ -474,10 +523,11 @@ Sleep, 1500
     GLOBAL stackSetStatus := "COMPLETE"
     GuiControl, Text, LastLoopRow, %LastRowSent%
     GuiControl, Text, LoopStateText, %stackSetStatus%
-    WinActivate, Layers
 
 DoShiftHotbarTo1()
+PerformanceMinimize()
 SplashTextOff
+WinActivate, Layers
 TransitionFrom3ToEnd()
 SetTimer, IssueHB3all, Off
     Return
@@ -523,6 +573,8 @@ GLOBAL cl_char06 := "Anarchy Online - " . ICvarCHAR06
     Sleep, 50
     Send {Shift UP}
     Sleep, 800
+     PerformanceMinimize_1()
+    Sleep, 50
     }
     Else
     {
@@ -539,6 +591,8 @@ GLOBAL cl_char06 := "Anarchy Online - " . ICvarCHAR06
     Sleep, 50
     Send {Shift UP}
     Sleep, 800
+     PerformanceMinimize_2()
+    Sleep, 50
     }
     Else
     {
@@ -555,6 +609,8 @@ GLOBAL cl_char06 := "Anarchy Online - " . ICvarCHAR06
     Sleep, 50
     Send {Shift UP}
     Sleep, 800
+     PerformanceMinimize_3()
+    Sleep, 50
     }
     Else
     {
@@ -571,6 +627,8 @@ GLOBAL cl_char06 := "Anarchy Online - " . ICvarCHAR06
     Sleep, 50
     Send {Shift UP}
     Sleep, 800
+     PerformanceMinimize_4()
+    Sleep, 50
     }
     Else
     {
@@ -587,6 +645,8 @@ GLOBAL cl_char06 := "Anarchy Online - " . ICvarCHAR06
     Sleep, 50
     Send {Shift UP}
     Sleep, 800
+     PerformanceMinimize_5()
+    Sleep, 50
     }
     Else
     {
@@ -603,13 +663,16 @@ GLOBAL cl_char06 := "Anarchy Online - " . ICvarCHAR06
     Sleep, 50
     Send {Shift UP}
     Sleep, 800
+     PerformanceMinimize_6()
+    Sleep, 50
     }
     Else
     {
             Sleep, 10
     }
+    
 
-    ; Return
+    Return
 }
 
 
@@ -642,6 +705,8 @@ GLOBAL cl_char06 := "Anarchy Online - " . ICvarCHAR06
     Sleep, 250
     Send {Shift UP}
     Sleep, 800
+     PerformanceMinimize_1()
+    Sleep, 50
     }
     Else
     {
@@ -659,6 +724,8 @@ GLOBAL cl_char06 := "Anarchy Online - " . ICvarCHAR06
     Sleep, 250
     Send {Shift UP}
     Sleep, 800
+     PerformanceMinimize_2()
+    Sleep, 50
     }
     Else
     {
@@ -676,6 +743,8 @@ GLOBAL cl_char06 := "Anarchy Online - " . ICvarCHAR06
     Sleep, 250
     Send {Shift UP}
     Sleep, 800
+     PerformanceMinimize_3()
+    Sleep, 50
     }
     Else
     {
@@ -693,6 +762,8 @@ GLOBAL cl_char06 := "Anarchy Online - " . ICvarCHAR06
     Sleep, 250
     Send {Shift UP}
     Sleep, 800
+     PerformanceMinimize_4()
+    Sleep, 50
     }
     Else
     {
@@ -710,6 +781,8 @@ GLOBAL cl_char06 := "Anarchy Online - " . ICvarCHAR06
     Sleep, 250
     Send {Shift UP}
     Sleep, 800
+     PerformanceMinimize_5()
+    Sleep, 50
     }
     Else
     {
@@ -727,11 +800,14 @@ GLOBAL cl_char06 := "Anarchy Online - " . ICvarCHAR06
     Sleep, 250
     Send {Shift UP}
     Sleep, 800
+     PerformanceMinimize_6()
+    Sleep, 50
     }
     Else
     {
             Sleep, 10
     }
+     
 
     Return
 }
@@ -766,6 +842,8 @@ GLOBAL cl_char06 := "Anarchy Online - " . ICvarCHAR06
     Sleep, 50
     Send {Shift UP}
     Sleep, 800
+     PerformanceMinimize_1()
+    Sleep, 50
     }
     Else
     {
@@ -782,6 +860,8 @@ GLOBAL cl_char06 := "Anarchy Online - " . ICvarCHAR06
     Sleep, 50
     Send {Shift UP}
     Sleep, 800
+     PerformanceMinimize_2()
+    Sleep, 50
     }
     Else
     {
@@ -798,6 +878,8 @@ GLOBAL cl_char06 := "Anarchy Online - " . ICvarCHAR06
     Sleep, 50
     Send {Shift UP}
     Sleep, 800
+     PerformanceMinimize_3()
+    Sleep, 50
     }
     Else
     {
@@ -814,6 +896,8 @@ GLOBAL cl_char06 := "Anarchy Online - " . ICvarCHAR06
     Sleep, 50
     Send {Shift UP}
     Sleep, 800
+     PerformanceMinimize_4()
+    Sleep, 50
     }
     Else
     {
@@ -830,6 +914,8 @@ GLOBAL cl_char06 := "Anarchy Online - " . ICvarCHAR06
     Sleep, 50
     Send {Shift UP}
     Sleep, 800
+     PerformanceMinimize_5()
+    Sleep, 50
     }
     Else
     {
@@ -846,11 +932,14 @@ GLOBAL cl_char06 := "Anarchy Online - " . ICvarCHAR06
     Sleep, 50
     Send {Shift UP}
     Sleep, 800
+     PerformanceMinimize_6()
+    Sleep, 50
     }
     Else
     {
             Sleep, 10
     }
+     
 
     Return
 }
@@ -1101,6 +1190,225 @@ ControlSend,ahk_parent, {0}, Anarchy Online - %ClientCharSlot6%
 
 
 
+
+
+
+
+
+
+
+PerformanceMinimize()  ;;; This is a hotfix(?)
+{
+    IniRead, PerformanceMode, buff_core.ini, DEBUG, Performance_Mode,  ;;; Default]
+    ; GLOBAL Performance_Mode := PerformanceMode
+    If(PerformanceMode = 1)
+    {
+        MsgBox, Did Performance Minimize!
+Sleep, 50
+WinActivate, Anarchy Online - %ClientCharSlot6%
+Sleep, 10
+WinMinimize, Anarchy Online - %ClientCharSlot6%
+
+Sleep, 50
+WinActivate, Anarchy Online - %ClientCharSlot5%
+Sleep, 10
+WinMinimize, Anarchy Online - %ClientCharSlot5%
+
+Sleep, 50
+WinActivate, Anarchy Online - %ClientCharSlot4%
+Sleep, 10
+WinMinimize, Anarchy Online - %ClientCharSlot4%
+
+Sleep, 50
+WinActivate, Anarchy Online - %ClientCharSlot3%
+Sleep, 10
+WinMinimize, Anarchy Online - %ClientCharSlot3%
+
+Sleep, 50
+WinActivate, Anarchy Online - %ClientCharSlot2%
+Sleep, 10
+WinMinimize, Anarchy Online - %ClientCharSlot2%
+
+Sleep, 50
+WinActivate, Anarchy Online - %ClientCharSlot1%
+Sleep, 10
+WinMinimize, Anarchy Online - %ClientCharSlot1%
+Sleep, 200
+SetTitleMatchMode, 2
+Sleep, 500
+WinMinimize, Anarchy Online - 
+Sleep, 50
+SetTitleMatchMode, 1
+    }
+    Else
+    {
+        MsgBox, Did Not Performance Minimize!
+        Sleep 10
+        Return
+    }
+    Return
+}
+
+
+
+; PerformanceMinimize()  ;;; This is a hotfix(?)
+; {
+;     IniRead, PerformanceMode, buff_core.ini, DEBUG, Performance_Mode ,  ;;; Default]
+;     ; GLOBAL Performance_Mode := PerformanceMode
+;     If(PerformanceMode = 1)
+;     {
+;     WinActivate, Anarchy Online - %ClientCharSlot1%
+;     Sleep, 50
+;     ; Run, %A_ScriptDir%\form_perfomance.ahk
+;     Run, %A_ScriptDir%\form_perfomance.exe
+;     ; Process, WaitClose, form_performance.exe
+;         ; Return
+;     }
+;     Else
+;     {
+;         Sleep 10
+;         Return
+;     }
+;     Return
+; }
+
+
+
+PerformanceMinimize_1()  ;;; called after the script runs the first shift+1 hotbar row change on character number one, then executed sequentially after each loop, in then ext same place
+{
+    IniRead, PerformanceMode, buff_core.ini, DEBUG, Performance_Mode ,  ;;; Default]
+    GLOBAL Performance_Mode := PerformanceMode
+    If(Performance_Mode = 1)
+    {
+    WinMinimize, Anarchy Online - %ClientCharSlot1%    ;; minimize window 1 because we just completed it, etc.
+    ; WinMinimize, Anarchy Online - %ClientCharSlot2%  ;; don't minimize 2, because that is the next window we will activate, etc.
+    WinMinimize, Anarchy Online - %ClientCharSlot3%
+    WinMinimize, Anarchy Online - %ClientCharSlot4%
+    WinMinimize, Anarchy Online - %ClientCharSlot5%
+    WinMinimize, Anarchy Online - %ClientCharSlot6%
+        ; Return
+    }
+    Else
+    {
+        Sleep 10
+        Return
+    }
+    Return
+}
+
+PerformanceMinimize_2()
+{
+    IniRead, PerformanceMode, buff_core.ini, DEBUG, Performance_Mode ,  ;;; Default]
+    GLOBAL Performance_Mode := PerformanceMode
+    If(Performance_Mode = 1)
+    {
+    WinMinimize, Anarchy Online - %ClientCharSlot1%
+    WinMinimize, Anarchy Online - %ClientCharSlot2%
+    ; WinMinimize, Anarchy Online - %ClientCharSlot3%
+    WinMinimize, Anarchy Online - %ClientCharSlot4%
+    WinMinimize, Anarchy Online - %ClientCharSlot5%
+    WinMinimize, Anarchy Online - %ClientCharSlot6%
+        ; Return
+    }
+    Else
+    {
+        Sleep 10
+        Return
+    }
+    Return
+}
+
+PerformanceMinimize_3()
+{
+    IniRead, PerformanceMode, buff_core.ini, DEBUG, Performance_Mode ,  ;;; Default]
+    GLOBAL Performance_Mode := PerformanceMode
+    If(Performance_Mode = 1)
+    {
+    WinMinimize, Anarchy Online - %ClientCharSlot1%
+    WinMinimize, Anarchy Online - %ClientCharSlot2%
+    WinMinimize, Anarchy Online - %ClientCharSlot3%
+    ; WinMinimize, Anarchy Online - %ClientCharSlot4%
+    WinMinimize, Anarchy Online - %ClientCharSlot5%
+    WinMinimize, Anarchy Online - %ClientCharSlot6%
+        ; Return
+    }
+    Else
+    {
+        Sleep 10
+        Return
+    }
+    Return
+}
+
+PerformanceMinimize_4()
+{
+    IniRead, PerformanceMode, buff_core.ini, DEBUG, Performance_Mode ,  ;;; Default]
+    GLOBAL Performance_Mode := PerformanceMode
+    If(Performance_Mode = 1)
+    {
+    WinMinimize, Anarchy Online - %ClientCharSlot1%
+    WinMinimize, Anarchy Online - %ClientCharSlot2%
+    WinMinimize, Anarchy Online - %ClientCharSlot3%
+    WinMinimize, Anarchy Online - %ClientCharSlot4%
+    ; WinMinimize, Anarchy Online - %ClientCharSlot5%
+    WinMinimize, Anarchy Online - %ClientCharSlot6%
+        ; Return
+    }
+    Else
+    {
+        Sleep 10
+        Return
+    }
+    Return
+}
+
+PerformanceMinimize_5()
+{
+    IniRead, PerformanceMode, buff_core.ini, DEBUG, Performance_Mode ,  ;;; Default]
+    GLOBAL Performance_Mode := PerformanceMode
+    If(Performance_Mode = 1)
+    {
+    WinMinimize, Anarchy Online - %ClientCharSlot1%
+    WinMinimize, Anarchy Online - %ClientCharSlot2%
+    WinMinimize, Anarchy Online - %ClientCharSlot3%
+    WinMinimize, Anarchy Online - %ClientCharSlot4%
+    WinMinimize, Anarchy Online - %ClientCharSlot5%
+    ; WinMinimize, Anarchy Online - %ClientCharSlot6%
+        ; Return
+    }
+    Else
+    {
+        Sleep 10
+        Return
+    }
+    Return
+}
+
+PerformanceMinimize_6()
+{
+    IniRead, PerformanceMode, buff_core.ini, DEBUG, Performance_Mode ,  ;;; Default]
+    GLOBAL Performance_Mode := PerformanceMode
+    If(Performance_Mode = 1)
+    {
+    WinMinimize, Anarchy Online - %ClientCharSlot1%
+    WinMinimize, Anarchy Online - %ClientCharSlot2%
+    WinMinimize, Anarchy Online - %ClientCharSlot3%
+    WinMinimize, Anarchy Online - %ClientCharSlot4%
+    WinMinimize, Anarchy Online - %ClientCharSlot5%
+    ; WinMinimize, Anarchy Online - %ClientCharSlot6%
+    Sleep, 100
+    WinActivate, Anarchy Online - %ClientCharSlot1%
+    Sleep, 100
+    WinMinimize, Anarchy Online - %ClientCharSlot6%
+        ; Return
+    }
+    Else
+    {
+        Sleep 10
+        Return
+    }
+    Return
+}
 
 
 
