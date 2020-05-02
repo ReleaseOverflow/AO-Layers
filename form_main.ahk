@@ -319,6 +319,24 @@ IniWrite, %A_Space%%E3%, buff_core.ini, CLIENT, CharacterName_03
 IniWrite, %A_Space%%E4%, buff_core.ini, CLIENT, CharacterName_04
 IniWrite, %A_Space%%E5%, buff_core.ini, CLIENT, CharacterName_05
 IniWrite, %A_Space%%E6%, buff_core.ini, CLIENT, CharacterName_06
+Sleep, 100
+IniRead, cl_CharSlot1, buff_core.ini, CLIENT, CharacterName_01
+GLOBAL ClientCharSlot1 := cl_CharSlot1
+
+IniRead, cl_CharSlot2, buff_core.ini, CLIENT, CharacterName_02
+GLOBAL ClientCharSlot2 := cl_CharSlot2
+
+IniRead, cl_CharSlot3, buff_core.ini, CLIENT, CharacterName_03
+GLOBAL ClientCharSlot3 := cl_CharSlot3
+
+IniRead, cl_CharSlot4, buff_core.ini, CLIENT, CharacterName_04
+GLOBAL ClientCharSlot4 := cl_CharSlot4
+
+IniRead, cl_CharSlot5, buff_core.ini, CLIENT, CharacterName_05
+GLOBAL ClientCharSlot5 := cl_char05
+
+IniRead, cl_CharSlot6, buff_core.ini, CLIENT, CharacterName_06
+GLOBAL ClientCharSlot6 := cl_char06
 Return
 
 SubmitSpeeds:
