@@ -1,0 +1,547 @@
+﻿; #Include _$GLOBAL.toolkit
+; #Include _$HUD.toolkit
+
+
+
+
+;;;;=====================================================================================================================================================================
+;;;;=====================================================================================================================================================================
+
+
+;; SCANCOLD FUNCTION EXAMPLES
+
+; ScanCold()
+; {
+;     If ExtruderScanPass = 
+; }
+
+;;;; The answer is in here: <!-- m -->http://www.autohotke...s.htm#Operators<!-- m -->
+
+; Var1 += 20 ; adds 20 to Var1
+; Var1 -= 20 ; subtracts 20 from Var1
+
+;;;; You can do the same with another variable:
+; Var1 -= Var2 ; subtracts Var2 from Var1
+
+;;;; But that can be a little confusing, so I would do something like this:
+; Var3 := (Var1 - Var2)
+
+;;;; It's just a matter of preference.
+
+
+;;;;=====================================================================================================================================================================
+;;;;=====================================================================================================================================================================
+
+
+
+
+ExtruderScan()
+{
+    
+    DetectExtruderMachine()  ; call the first scan  
+    ParseLHud_e()
+}
+ 
+
+ParseLHud_e()
+{
+SetTimer, UpdateExtruderHud, 2500
+Return
+}
+
+
+
+
+;   FINDCLICK IMAGE SCANS BELOW
+;________________________________________________________________________________________________________________________________________________________________________________________;
+;  SCAN EXTRUDER MACHINE *ROOT*  
+;________________________________________________________________________________________________________________________________________________________________________________________;
+
+        DetectExtruderMachine()   ;; find the extruder machine on-screen, right click it to generate a bar.
+        {
+            IniRead, ActiveTrader, stack_core.ini, CLIENT, CurrentTrader, Default]
+            WinActivate, Anarchy Online - %ActiveTrader%
+Results := FindClick("$imgsrc_ExtruderMachine.png", "n e w silent") ; "n" tells FindClick to click on the match, output the coordinates that we located the image at to var.
+ ;   the 'w' in the Ex: FindClick("playDota.png", "n e w") flags makes the FindClick wait for the playDota.png image to appear on the screen in any capacity (full script pause)
+ ;   the 'w' in the "N E W17000" flags above makes the FindClick wait 17 seconds for the Dota2UpdateDetected.png image to appear on screen in any capacity. Then if it doesn't, continue auto queue launch.  If it does exist on launch, then exit the game and reload the script.  In the future, make this write to a text file a command value to fileread at the start of script logic, to determine if the game was closed due to a detected desired update.  Force the user to manually launch the game to perform the needed udpates. (for instance, make all hotkeys output something like: MsgBox, 48, System, %PROGRAMWINDOW% NEEDS TO UPDATE. PLEASE MANUALLY LAUNCH THE GAME.) The script can watch for the game to be launched during this phase, and once it has determined the game launched without any more update notifications on launch, undo hotkey locks and resume normal logic.
+IfEarlyInputLockActive()
+StartHangTimerCheck()
+Loop, Parse, Results, `n
+If (A_Index =1) { ; 1st image found
+StringSplit, Coords, A_LoopField, `,
+IfNotEqual, Coords1, 0
+; if (%Coords1%) and (%Coords2%) = 0
+{
+    PeformExtraWinActivates_E()
+    MouseGetPos, CurrentX, CurrentY 
+    PeformExtraWinActivates_E()
+    BlockInput()
+Sleep, 200
+PeformExtraWinActivates_E()
+        Sleep, 10
+        PeformExtraWinActivates_E()
+        MouseMove, %Coords1%, %Coords2%
+        Sleep, 5
+        PeformExtraWinActivates_E()
+        MouseMove, %Coords1%, %Coords2%
+        Sleep, 5
+        PeformExtraWinActivates_E()
+        MouseMove, %Coords1%, %Coords2%
+        Sleep, 5
+        PeformExtraWinActivates_E()
+        MouseMove, %Coords1%, %Coords2%
+        Sleep, 5
+        PeformExtraWinActivates_E()
+        MouseMove, %Coords1%, %Coords2%
+        PeformExtraWinActivates_E()
+        Sleep, 20
+        Send {RButton}
+        Sleep, 10
+        Sleep, 450
+        MouseMove, %CurrentX%, %CurrentY%
+        ReleaseInput()
+        KillHangTimer()
+; ; SetTimer, StartScan, Off
+; StopScanSuccess()
+; QueueRunningToolTrayset()
+; ; SetTimer, ClampTarget, %interp_clamp_window%    ; DEPRECATED because now we call the parsetargetwindowclamp func to ensure we have a consistent working control over each instance
+; ParseTargetWindowClamp()
+; ToolTip, [%ProgramWindowLabel% Auto Accepter v%EngineVersion%] is {RUNNING}`nPress F10 to disable this message
+        ; DetectLowPrioBtn()
+        DetectSingleBar() 
+    Return
+} Else {
+    ; DetectBarStack1()
+    ReleaseInput()
+    KillHangTimer()
+        Return
+       }
+Break
+}
+        }
+
+
+
+
+
+;________________________________________________________________________________________________________________________________________________________________________________________;
+;________________________________________________________________________________________________________________________________________________________________________________________;
+;  SCAN EXTRUDER BAR_SINGLE 00
+;________________________________________________________________________________________________________________________________________________________________________________________;
+
+        DetectSingleBar()    ;; find a single extruder bar on screen, left click it to pick it up
+        {
+            IniRead, ActiveTrader, stack_core.ini, CLIENT, CurrentTrader, Default]
+            WinActivate, Anarchy Online - %ActiveTrader%
+Results := FindClick("$imgsrc_BarSingle.png", "n e w500 silent") ; "n" tells FindClick to click on the match, output the coordinates that we located the image at to var.
+ ;   the 'w' in the Ex: FindClick("playDota.png", "n e w") flags makes the FindClick wait for the playDota.png image to appear on the screen in any capacity (full script pause)
+ ;   the 'w' in the "N E W17000" flags above makes the FindClick wait 17 seconds for the Dota2UpdateDetected.png image to appear on screen in any capacity. Then if it doesn't, continue auto queue launch.  If it does exist on launch, then exit the game and reload the script.  In the future, make this write to a text file a command value to fileread at the start of script logic, to determine if the game was closed due to a detected desired update.  Force the user to manually launch the game to perform the needed udpates. (for instance, make all hotkeys output something like: MsgBox, 48, System, %PROGRAMWINDOW% NEEDS TO UPDATE. PLEASE MANUALLY LAUNCH THE GAME.) The script can watch for the game to be launched during this phase, and once it has determined the game launched without any more update notifications on launch, undo hotkey locks and resume normal logic.
+IfEarlyInputLockActive()
+StartHangTimerCheck()
+Loop, Parse, Results, `n
+If (A_Index =1) { ; 1st image found
+StringSplit, Coords, A_LoopField, `,
+IfNotEqual, Coords1, 0
+; if (%Coords1%) and (%Coords2%) = 0
+{
+    GLOBAL ExtruderScanPass += 1  ;; ADD 1 TO THE GLOBAL SCAN PASS STRING
+    PeformExtraWinActivates_E()
+    MouseGetPos, CurrentX, CurrentY 
+    BlockInput()
+Sleep, 200
+PeformExtraWinActivates_E()
+        Sleep, 10
+        PeformExtraWinActivates_E()
+        MouseMove, %Coords1%, %Coords2%
+        Sleep, 5
+        PeformExtraWinActivates_E()
+        MouseMove, %Coords1%, %Coords2%
+        Sleep, 5
+        PeformExtraWinActivates_E()
+        MouseMove, %Coords1%, %Coords2%
+        Sleep, 5
+        PeformExtraWinActivates_E()
+        MouseMove, %Coords1%, %Coords2%
+        Sleep, 5
+        PeformExtraWinActivates_E()
+        MouseMove, %Coords1%, %Coords2%
+        PeformExtraWinActivates_E()
+        Sleep, 50
+        ; Click
+        Send {LButton}
+        ; Click
+        Sleep, 10
+        Sleep, 450
+        ReleaseInput()
+        MouseMove, %CurrentX%, %CurrentY%
+; ; SetTimer, StartScan, Off
+; StopScanSuccess()
+; QueueRunningToolTrayset()
+; ; SetTimer, ClampTarget, %interp_clamp_window%    ; DEPRECATED because now we call the parsetargetwindowclamp func to ensure we have a consistent working control over each instance
+; ParseTargetWindowClamp()
+; ToolTip, [%ProgramWindowLabel% Auto Accepter v%EngineVersion%] is {RUNNING}`nPress F10 to disable this message
+        ; DetectLowPrioBtn()
+    KillHangTimer()
+    DetectBarStack1()
+    Return
+} Else {
+    ; DetectBarStack1()
+    KillHangTimer()
+        Return
+       }
+Break
+}
+        }
+
+
+
+
+
+;________________________________________________________________________________________________________________________________________________________________________________________;
+;  SCAN EXTRUDER BAR_STACK 01
+;________________________________________________________________________________________________________________________________________________________________________________________;
+
+DetectBarStack1()    ;; find an extruder bar stack on screen, left click it to merge single bar with stack, if it doesn't exist, loop to the next stack image
+{
+            IniRead, ActiveTrader, stack_core.ini, CLIENT, CurrentTrader, Default]
+            ; WinActivate, Anarchy Online - %ActiveTrader%
+    Results := FindClick("$imgsrc_Bar7Stack.png", "n e w500 silent") ; "n" tells FindClick to not click on the images, instead just output the coordinates that we located the image at to confirm we found it
+ ;   the 'w' in the "N E W17000" flags above makes the FindClick wait 17 seconds for the Dota2UpdateDetected.png image to appear on screen in any capacity. Then if it doesn't, continue auto queue launch.  If it does exist on launch, then exit the game and reload the script.  In the future, make this write to a text file a command value to fileread at the start of script logic, to determine if the game was closed due to a detected desired update.  Force the user to manually launch the game to perform the needed udpates. (for instance, make all hotkeys output something like: MsgBox, 48, System, %PROGRAMWINDOW% NEEDS TO UPDATE. PLEASE MANUALLY LAUNCH THE GAME.) The script can watch for the game to be launched during this phase, and once it has determined the game launched without any more update notifications on launch, undo hotkey locks and resume normal logic.
+   IfEarlyInputLockActive()
+   StartHangTimerCheck()
+Loop, Parse, Results, `n
+If (A_Index =1) { ; 1st image found
+StringSplit, Coords, A_LoopField, `,
+; MsgBox, The coordinates are (%Coords1%,%Coords2%)
+IfNotEqual, Coords1, 0
+; if (%Coords1%) and (%Coords2%) = 0
+{
+    GLOBAL ExtruderScanPass += 1  ;; ADD 1 TO THE GLOBAL SCAN PASS STRING
+    PeformExtraWinActivates_E()
+    MouseGetPos, CurrentX, CurrentY 
+    PeformExtraWinActivates_E()
+BlockInput()
+Sleep, 200
+PeformExtraWinActivates_E()
+        Sleep, 10
+        PeformExtraWinActivates_E()
+        MouseMove, %Coords1%, %Coords2%
+        Sleep, 5
+        PeformExtraWinActivates_E()
+        MouseMove, %Coords1%, %Coords2%
+        Sleep, 5
+        PeformExtraWinActivates_E()
+        MouseMove, %Coords1%, %Coords2%
+        Sleep, 5
+        PeformExtraWinActivates_E()
+        MouseMove, %Coords1%, %Coords2%
+        Sleep, 5
+        PeformExtraWinActivates_E()
+        MouseMove, %Coords1%, %Coords2%
+        PeformExtraWinActivates_E()
+        Sleep, 20
+        Send {LButton}
+        Sleep, 10
+        Sleep, 450
+        ReleaseInput()
+        MouseMove, %CurrentX%, %CurrentY%
+        DetectSingleBar2pas()
+        KillHangTimer()
+    ; StackClick1()
+    Return
+} Else {
+    ReleaseInput()
+    DetectBarStack2()
+    KillHangTimer()
+        Return
+       }
+Break
+}
+}
+
+;         StackClick1()
+;         {
+;         ; ParseTargetWindowClamp()
+; Results := FindClick("$imgsrc_Bar7Stack.png") ; "n" tells FindClick to click on the match, output the coordinates that we located the image at to var.
+;  ;   the 'w' in the Ex: FindClick("playDota.png", "n e w") flags makes the FindClick wait for the playDota.png image to appear on the screen in any capacity (full script pause)
+;  ;   the 'w' in the "N E W17000" flags above makes the FindClick wait 17 seconds for the Dota2UpdateDetected.png image to appear on screen in any capacity. Then if it doesn't, continue auto queue launch.  If it does exist on launch, then exit the game and reload the script.  In the future, make this write to a text file a command value to fileread at the start of script logic, to determine if the game was closed due to a detected desired update.  Force the user to manually launch the game to perform the needed udpates. (for instance, make all hotkeys output something like: MsgBox, 48, System, %PROGRAMWINDOW% NEEDS TO UPDATE. PLEASE MANUALLY LAUNCH THE GAME.) The script can watch for the game to be launched during this phase, and once it has determined the game launched without any more update notifications on launch, undo hotkey locks and resume normal logic.
+; Loop, Parse, Results, `n
+; If (A_Index =1) { ; 1st image found
+; StringSplit, Coords, A_LoopField, `,
+;         Sleep, 200
+;         MouseMove, %Coords1%, %Coords2%
+;         Click
+;         ; Click
+;         Sleep, 50
+;         }
+;         }
+
+
+;________________________________________________________________________________________________________________________________________________________________________________________;
+;  SCAN EXTRUDER BAR_STACK 02
+;________________________________________________________________________________________________________________________________________________________________________________________;
+
+DetectBarStack2()    ;; find an extruder bar stack on screen, left click it to merge single bar with stack, if it doesn't exist, loop to the next stack image
+{
+            IniRead, ActiveTrader, stack_core.ini, CLIENT, CurrentTrader, Default]
+            WinActivate, Anarchy Online - %ActiveTrader%
+    Results := FindClick("$imgsrc_Bar4Stack.png", "n e w500 silent") ; "n" tells FindClick to not click on the images, instead just output the coordinates that we located the image at to confirm we found it
+ ;   the 'w' in the "N E W17000" flags above makes the FindClick wait 17 seconds for the Dota2UpdateDetected.png image to appear on screen in any capacity. Then if it doesn't, continue auto queue launch.  If it does exist on launch, then exit the game and reload the script.  In the future, make this write to a text file a command value to fileread at the start of script logic, to determine if the game was closed due to a detected desired update.  Force the user to manually launch the game to perform the needed udpates. (for instance, make all hotkeys output something like: MsgBox, 48, System, %PROGRAMWINDOW% NEEDS TO UPDATE. PLEASE MANUALLY LAUNCH THE GAME.) The script can watch for the game to be launched during this phase, and once it has determined the game launched without any more update notifications on launch, undo hotkey locks and resume normal logic.
+   IfEarlyInputLockActive()
+   StartHangTimerCheck()
+Loop, Parse, Results, `n
+If (A_Index =1) { ; 1st image found
+StringSplit, Coords, A_LoopField, `,
+; MsgBox, The coordinates are (%Coords1%,%Coords2%)
+IfNotEqual, Coords1, 0
+; if (%Coords1%) and (%Coords2%) = 0
+{
+    GLOBAL ExtruderScanPass += 1  ;; ADD 1 TO THE GLOBAL SCAN PASS STRING
+    PeformExtraWinActivates_E()
+    MouseGetPos, CurrentX, CurrentY 
+    PeformExtraWinActivates_E()
+BlockInput()
+Sleep, 200
+PeformExtraWinActivates_E()
+        Sleep, 10
+        PeformExtraWinActivates_E()
+        MouseMove, %Coords1%, %Coords2%
+        Sleep, 5
+        PeformExtraWinActivates_E()
+        MouseMove, %Coords1%, %Coords2%
+        Sleep, 5
+        PeformExtraWinActivates_E()
+        MouseMove, %Coords1%, %Coords2%
+        Sleep, 5
+        PeformExtraWinActivates_E()
+        MouseMove, %Coords1%, %Coords2%
+        Sleep, 5
+        PeformExtraWinActivates_E()
+        MouseMove, %Coords1%, %Coords2%
+        PeformExtraWinActivates_E()
+        Sleep, 20
+        Send {LButton}
+        Sleep, 10
+        Sleep, 450
+        ReleaseInput()
+        MouseMove, %CurrentX%, %CurrentY%
+        KillHangTimer()
+        DetectSingleBar2pas()
+    ; StackClick1()
+    Return
+} Else {
+    DetectBarStack3()
+    ; ReleaseInput()
+    KillHangTimer()
+        Return
+       }
+Break
+}
+}
+
+;         StackClick1()
+;         {
+;         ; ParseTargetWindowClamp()
+; Results := FindClick("$imgsrc_Bar7Stack.png") ; "n" tells FindClick to click on the match, output the coordinates that we located the image at to var.
+;  ;   the 'w' in the Ex: FindClick("playDota.png", "n e w") flags makes the FindClick wait for the playDota.png image to appear on the screen in any capacity (full script pause)
+;  ;   the 'w' in the "N E W17000" flags above makes the FindClick wait 17 seconds for the Dota2UpdateDetected.png image to appear on screen in any capacity. Then if it doesn't, continue auto queue launch.  If it does exist on launch, then exit the game and reload the script.  In the future, make this write to a text file a command value to fileread at the start of script logic, to determine if the game was closed due to a detected desired update.  Force the user to manually launch the game to perform the needed udpates. (for instance, make all hotkeys output something like: MsgBox, 48, System, %PROGRAMWINDOW% NEEDS TO UPDATE. PLEASE MANUALLY LAUNCH THE GAME.) The script can watch for the game to be launched during this phase, and once it has determined the game launched without any more update notifications on launch, undo hotkey locks and resume normal logic.
+; Loop, Parse, Results, `n
+; If (A_Index =1) { ; 1st image found
+; StringSplit, Coords, A_LoopField, `,
+;         Sleep, 200
+;         MouseMove, %Coords1%, %Coords2%
+;         Click
+;         ; Click
+;         Sleep, 50
+;         }
+;         }
+
+
+;________________________________________________________________________________________________________________________________________________________________________________________;
+
+
+;  SCAN EXTRUDER BAR_STACK 03
+;________________________________________________________________________________________________________________________________________________________________________________________;
+
+ 
+
+DetectBarStack3()    ;; find an extruder bar stack on screen, left click it to merge single bar with stack, if it doesn't exist, loop to the next stack image
+{
+            IniRead, ActiveTrader, stack_core.ini, CLIENT, CurrentTrader, Default]
+            WinActivate, Anarchy Online - %ActiveTrader%
+    Results := FindClick("$imgsrc_Bar67Stack.png", "n e w500 silent") ; "n" tells FindClick to not click on the images, instead just output the coordinates that we located the image at to confirm we found it
+ ;   the 'w' in the "N E W17000" flags above makes the FindClick wait 17 seconds for the Dota2UpdateDetected.png image to appear on screen in any capacity. Then if it doesn't, continue auto queue launch.  If it does exist on launch, then exit the game and reload the script.  In the future, make this write to a text file a command value to fileread at the start of script logic, to determine if the game was closed due to a detected desired update.  Force the user to manually launch the game to perform the needed udpates. (for instance, make all hotkeys output something like: MsgBox, 48, System, %PROGRAMWINDOW% NEEDS TO UPDATE. PLEASE MANUALLY LAUNCH THE GAME.) The script can watch for the game to be launched during this phase, and once it has determined the game launched without any more update notifications on launch, undo hotkey locks and resume normal logic.
+;    IfEarlyInputLockActive()
+   StartHangTimerCheck()
+Loop, Parse, Results, `n
+If (A_Index =1) { ; 1st image found
+StringSplit, Coords, A_LoopField, `,
+; MsgBox, The coordinates are (%Coords1%,%Coords2%)
+IfNotEqual, Coords1, 0
+; if (%Coords1%) and (%Coords2%) = 0
+{
+    GLOBAL ExtruderScanPass += 1  ;; ADD 1 TO THE GLOBAL SCAN PASS STRING
+    PeformExtraWinActivates_E()
+    MouseGetPos, CurrentX, CurrentY 
+BlockInput()
+PeformExtraWinActivates_E()
+Sleep, 200
+        Sleep, 10
+        PeformExtraWinActivates_E()
+        MouseMove, %Coords1%, %Coords2%
+        Sleep, 5
+        PeformExtraWinActivates_E()
+        MouseMove, %Coords1%, %Coords2%
+        Sleep, 5
+        PeformExtraWinActivates_E()
+        MouseMove, %Coords1%, %Coords2%
+        Sleep, 5
+        PeformExtraWinActivates_E()
+        MouseMove, %Coords1%, %Coords2%
+        Sleep, 5
+        PeformExtraWinActivates_E()
+        MouseMove, %Coords1%, %Coords2%
+        PeformExtraWinActivates_E()
+        Sleep, 20
+        Send {LButton}
+        Sleep, 10
+        Sleep, 450
+        ReleaseInput()
+        MouseMove, %CurrentX%, %CurrentY%
+        KillHangTimer()
+        DetectSingleBar2pas()
+    ; StackClick1()
+    Return
+} Else {
+    ; DetectBarStack4()
+    ReleaseInput()
+    KillHangTimer()
+        Return
+       }
+Break
+}
+}
+
+;         StackClick1()
+;         {
+;         ; ParseTargetWindowClamp()
+; Results := FindClick("$imgsrc_Bar7Stack.png") ; "n" tells FindClick to click on the match, output the coordinates that we located the image at to var.
+;  ;   the 'w' in the Ex: FindClick("playDota.png", "n e w") flags makes the FindClick wait for the playDota.png image to appear on the screen in any capacity (full script pause)
+;  ;   the 'w' in the "N E W17000" flags above makes the FindClick wait 17 seconds for the Dota2UpdateDetected.png image to appear on screen in any capacity. Then if it doesn't, continue auto queue launch.  If it does exist on launch, then exit the game and reload the script.  In the future, make this write to a text file a command value to fileread at the start of script logic, to determine if the game was closed due to a detected desired update.  Force the user to manually launch the game to perform the needed udpates. (for instance, make all hotkeys output something like: MsgBox, 48, System, %PROGRAMWINDOW% NEEDS TO UPDATE. PLEASE MANUALLY LAUNCH THE GAME.) The script can watch for the game to be launched during this phase, and once it has determined the game launched without any more update notifications on launch, undo hotkey locks and resume normal logic.
+; Loop, Parse, Results, `n
+; If (A_Index =1) { ; 1st image found
+; StringSplit, Coords, A_LoopField, `,
+;         Sleep, 200
+;         MouseMove, %Coords1%, %Coords2%
+;         Click
+;         ; Click
+;         Sleep, 50
+;         }
+;         }
+
+;________________________________________________________________________________________________________________________________________________________________________________________;
+
+
+
+
+
+
+        DetectSingleBar2pas()    ;; find a single extruder bar on screen, left click it to pick it up
+        {
+            ; ScanCold_Extruder()  ;; CHECK THE TICKER, IF ITS GREATER THAN 1, DON'T ALT-TAB
+            IniRead, ActiveTrader, stack_core.ini, CLIENT, CurrentTrader, Default]
+            WinActivate, Anarchy Online - %ActiveTrader%
+Results := FindClick("$imgsrc_BarSingle.png", "n e w500 silent") ; "n" tells FindClick to click on the match, output the coordinates that we located the image at to var.
+ ;   the 'w' in the Ex: FindClick("playDota.png", "n e w") flags makes the FindClick wait for the playDota.png image to appear on the screen in any capacity (full script pause)
+ ;   the 'w' in the "N E W17000" flags above makes the FindClick wait 17 seconds for the Dota2UpdateDetected.png image to appear on screen in any capacity. Then if it doesn't, continue auto queue launch.  If it does exist on launch, then exit the game and reload the script.  In the future, make this write to a text file a command value to fileread at the start of script logic, to determine if the game was closed due to a detected desired update.  Force the user to manually launch the game to perform the needed udpates. (for instance, make all hotkeys output something like: MsgBox, 48, System, %PROGRAMWINDOW% NEEDS TO UPDATE. PLEASE MANUALLY LAUNCH THE GAME.) The script can watch for the game to be launched during this phase, and once it has determined the game launched without any more update notifications on launch, undo hotkey locks and resume normal logic.
+;    IfEarlyInputLockActive()
+   StartHangTimerCheck()
+Loop, Parse, Results, `n
+If (A_Index =1) { ; 1st image found
+StringSplit, Coords, A_LoopField, `,
+IfNotEqual, Coords1, 0
+; if (%Coords1%) and (%Coords2%) = 0
+{
+    ; PeformExtraWinActivates_E()
+    MouseGetPos, CurrentX, CurrentY 
+    ; PeformExtraWinActivates_E()
+Sleep, 200
+PeformExtraWinActivates_E()
+        BlockInput()
+        Sleep, 10
+        PeformExtraWinActivates_E()
+        MouseMove, %Coords1%, %Coords2%
+        Sleep, 5
+        PeformExtraWinActivates_E()
+        MouseMove, %Coords1%, %Coords2%
+        Sleep, 5
+        PeformExtraWinActivates_E()
+        MouseMove, %Coords1%, %Coords2%
+        Sleep, 5
+        PeformExtraWinActivates_E()
+        MouseMove, %Coords1%, %Coords2%
+        Sleep, 5
+        PeformExtraWinActivates_E()
+        MouseMove, %Coords1%, %Coords2%
+        PeformExtraWinActivates_E()
+        Sleep, 10
+        ; Click
+        Send {LButton}
+        ; Click
+        Sleep, 10
+        ; ReleaseInput()
+        Sleep, 450
+        MouseMove, %CurrentX%, %CurrentY%
+; ; SetTimer, StartScan, Off
+; StopScanSuccess()
+; QueueRunningToolTrayset()
+; ; SetTimer, ClampTarget, %interp_clamp_window%    ; DEPRECATED because now we call the parsetargetwindowclamp func to ensure we have a consistent working control over each instance
+; ParseTargetWindowClamp()
+; ToolTip, [%ProgramWindowLabel% Auto Accepter v%EngineVersion%] is {RUNNING}`nPress F10 to disable this message
+        ; DetectLowPrioBtn()
+        GLOBAL ExtruderScanPass := "0"  ; SET THE TICKER BACK TO 0 AFTER EVERYONE EXTRA PASS, SO IF IT RETURNS GREATER THAN 0 BY THE END OF THE NEXT LOOP, WE KNOW THE ALT-TAB
+        KillHangTimer()
+        ReleaseInput()
+    DetectBarStack1()
+    Return
+} Else {
+    GLOBAL EXTRUDER_HIBERNATE := "1"
+        ReleaseInput()
+        KillHangTimer()
+    ; DetectBarStack1()
+        IfDoAltTab()
+        Return
+       }
+Break
+}
+        }
+
+
+
+
+
+
+
+
+
+
+
+PeformExtraWinActivates_E()
+{
+    IniRead, PersistentExtruderWin, stack_core.ini, ENGINE, Extruder_Persistent_Window_Activation, Default]
+If(PersistentExtruderWin = 1)
+{
+            IniRead, ActiveTrader, stack_core.ini, CLIENT, CurrentTrader, Default]
+            WinActivate, Anarchy Online - %ActiveTrader%
+}
+If(PersistentExtruderWin = 0)
+{
+    Return
+}
+}
+
+
+
+
+
+
