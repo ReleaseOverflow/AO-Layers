@@ -6,6 +6,7 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 #SingleInstance, Force
 
 
+
     GLOBAL LastRowSent := "NULL"
     GLOBAL LastKeySent := ""
     GLOBAL stackSetStatus := "HIBERNATING..."
